@@ -2,7 +2,6 @@
 TARBALL=gcc-$1.tar.gz
 
 # ensure dependencies
-sudo yum install libmpc-devel mpfr-devel gmp-devel zlib-devel*
 mkdir -p src tarballs releases
 
 pushd tarballs > /dev/null
