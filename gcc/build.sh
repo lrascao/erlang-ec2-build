@@ -1,23 +1,22 @@
 #!/bin/bash
 TARBALL=gcc-$1.tar.gz
+PWD=`pwd`
 
-# ensure dependencies
+# ensure dirs
 mkdir -p src tarballs releases
 
 pushd tarballs > /dev/null
-
-if [ ! -e "$TARBALL" ]
-then
-	wget ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$1/$TARBALL
-	wget ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$1/$TARBALL.sig
-fi
-# verify the signature
-gpg --verify $TARBALL.sig $TARBALL
-if [ ! $? -eq 0 ]
-then
-	echo "invalid signatures for gcc $1"
-fi
-
+    if [ ! -e "$TARBALL" ]
+    then
+        wget ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$1/$TARBALL
+        wget ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$1/$TARBALL.sig
+    fi
+    # verify the signature
+    gpg --verify $TARBALL.sig $TARBALL
+    if [ ! $? -eq 0 ]
+    then
+        echo "invalid signatures for gcc $1"
+    fi
 popd
 
 pushd src > /dev/null
@@ -26,7 +25,7 @@ pushd src > /dev/null
 	rm $TARBALL
 
 	pushd gcc-$1 > /dev/null
-		./configure --prefix=/home/ec2-user/gcc/releases/$1 --with-system-zlib --disable-multilib --enable-languages=c,c++
+		./configure --prefix=$PWD/releases/$1 --with-system-zlib --disable-multilib --enable-languages=c,c++
 
 		make
 		make install
@@ -34,6 +33,6 @@ pushd src > /dev/null
 popd
 
 pushd releases
-	rm latest
+	rm -f latest
 	ln -s $1 latest
 popd
