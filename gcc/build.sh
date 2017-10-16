@@ -36,3 +36,12 @@ pushd releases
 	rm -f latest
 	ln -s $1 latest
 popd
+
+# update alternative gcc
+# update alternative gcc
+sudo update-alternatives --install /usr/bin/gcc gcc $BASE_DIR/releases/latest/bin/gcc-$1 10
+sudo update-alternatives --install /usr/bin/g++ g++ $BASE_DIR/releases/latest/bin/g++-$1 10
+
+sudo update-alternatives --set gcc "$BASE_DIR/releases/latest/bin/gcc-$1"
+sudo update-alternatives --set g++ "$BASE_DIR/releases/latest/bin/g++-$1"
+
