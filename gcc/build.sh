@@ -1,6 +1,6 @@
 #!/bin/bash
 TARBALL=gcc-$1.tar.gz
-PWD=`pwd`
+BASE_DIR=`pwd`
 
 # ensure dirs
 mkdir -p src tarballs releases
@@ -25,7 +25,7 @@ pushd src > /dev/null
 	rm $TARBALL
 
 	pushd gcc-$1 > /dev/null
-		./configure --prefix=$PWD/releases/$1 --with-system-zlib --disable-multilib --enable-languages=c,c++
+		./configure --prefix=$BASE_DIR/releases/$1 --with-system-zlib --disable-multilib --enable-languages=c,c++
 
 		make
 		make install
