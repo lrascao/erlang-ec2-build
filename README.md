@@ -41,7 +41,7 @@ Custom OpenSSL
 ```
     $ cd openssl
     $ cat README.md                 # for instructions
-    $ ./build.sh <openssl_version>  # (eg. ./build.sh 1.1.0f)
+    $ ./build.sh <openssl_version>  # (eg. ./build.sh 1.0.2l)
 ```
 
 Erlang
