@@ -30,7 +30,7 @@ pushd tarballs > /dev/null
     then
         echo "invalid signatures for gcc $VERSION"
     fi
-popd
+popd > /dev/null
 
 pushd src > /dev/null
 	cp ../tarballs/$TARBALL .
@@ -42,13 +42,13 @@ pushd src > /dev/null
 
 		make
 		make install
-	popd
-popd
+	popd > /dev/null
+popd > /dev/null
 
-pushd releases
+pushd releases > /dev/null
 	rm -f latest
 	ln -s $VERSION latest
-popd
+popd > /dev/null
 
 # update alternative gcc
 # update alternative gcc

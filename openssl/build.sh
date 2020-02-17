@@ -5,7 +5,7 @@ BASE_DIR=`pwd`
 
 mkdir -p releases src tarballs
 
-pushd tarballs  > /dev/null
+pushd tarballs > /dev/null
 	if [ ! -e "$TARBALL" ]
 	then
 		wget http://www.openssl.org/source/$TARBALL
@@ -17,24 +17,24 @@ pushd tarballs  > /dev/null
 	then
 		echo "invalid signature for openssl-$1"
 	fi
-popd
+popd > /dev/null
 
 mkdir -p releases/$VERSION
-pushd src
+pushd src > /dev/null
 	cp ../tarballs/$TARBALL .
 	tar xzvf $TARBALL
     rm $TARBALL
-	pushd openssl-$VERSION
+	pushd openssl-$VERSION > /dev/null
 		./config --prefix=$BASE_DIR/releases/$VERSION shared
 
 		make depend
 		make
 		make install
-	popd
-popd
+	popd > /dev/null
+popd > /dev/null
 
-pushd releases
+pushd releases > /dev/null
     rm -f latest
 	ln -s $1 latest
-popd
+popd > /dev/null
 
