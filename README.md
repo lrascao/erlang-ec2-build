@@ -25,13 +25,14 @@ Custom gcc
 * build a desired gcc version
 
 ```
-    $ cd gcc
+    $ pushd gcc > /dev/null
     $ cat README.md             # for instructions
     $ ./build.sh <gcc_version>  # (eg. ./build.sh 6.3.0)
+    $ popd > /dev/null
 ```
 
 * Add latest gcc to .bashrc PATH, this is the one that will be used from now on
-    * `export PATH=~/bin:~/erlang-ec2-build/gcc/releases/latest/bin:$PATH`
+    * `export PATH=~/erlang-ec2-build/gcc/releases/latest/bin:$PATH`
 
 Custom OpenSSL
 -----
@@ -39,9 +40,10 @@ Custom OpenSSL
 * Build desired openssl version
 
 ```
-    $ cd openssl
+    $ pushd openssl > /dev/null
     $ cat README.md                 # for instructions
     $ ./build.sh <openssl_version>  # (eg. ./build.sh 1.0.2l)
+    $ popd > /dev/null
 ```
 
 Erlang
