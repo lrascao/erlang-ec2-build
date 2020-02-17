@@ -3,6 +3,18 @@ VERSION=$1
 TARBALL=gcc-$VERSION.tar.gz
 BASE_DIR=`pwd`
 
+# ensure gcc and g++
+if [ "$(which gcc 2>/dev/null)" = "" ]
+then
+    echo "no valid gcc found. use update-alternatives to configure one"
+    exit 1
+fi
+if [ "$(which g++ 2>/dev/null)" = "" ]
+then
+    echo "no valid g++ found. use update-alternatives to configure one"
+    exit 1
+fi
+
 # ensure dirs
 mkdir -p src tarballs releases
 
