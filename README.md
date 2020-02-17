@@ -52,7 +52,15 @@ Erlang
 * Build desired erlang version
 
 ```
-    $ cd erlang
+    $ pushd erlang > /dev/null
     $ cat README.md             # for instructions
+    $ ./build <otp_version>     # (eg. ./build.sh 19.3)
+    $ popd
 ```
 
+tl;dr
+-----
+
+* This is the short version of these instructions, that joins all previous steps in one go:
+
+    * `git clone https://github.com/lrascao/erlang-ec2-build.git; cd erlang-ec2-build; GCC=6.3.0 OPENSSL=1.0.2l OTP=19.3 ./build.sh`
