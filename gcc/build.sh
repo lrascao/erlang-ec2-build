@@ -18,19 +18,12 @@ fi
 # ensure dirs
 mkdir -p src tarballs releases
 
-pushd tarballs > /dev/null
-    if [ ! -e "$TARBALL" ]
-    then
-        wget ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$VERSION/$TARBALL
-        wget ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$VERSION/$TARBALL.sig
-    fi
-    # verify the signature
-    gpg --verify $TARBALL.sig $TARBALL
-    if [ ! $? -eq 0 ]
-    then
-        echo "invalid signatures for gcc $VERSION"
-    fi
-popd > /dev/null
+if [ ! -e "$TARBALL" ]
+then
+    pushd tarballs > /dev/null
+    wget ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$VERSION/$TARBALL
+    popd > /dev/null
+fi
 
 pushd src > /dev/null
 	cp ../tarballs/$TARBALL .

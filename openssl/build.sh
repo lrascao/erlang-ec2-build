@@ -5,19 +5,12 @@ BASE_DIR=`pwd`
 
 mkdir -p releases src tarballs
 
-pushd tarballs > /dev/null
-	if [ ! -e "$TARBALL" ]
-	then
-		wget http://www.openssl.org/source/$TARBALL
-		wget http://www.openssl.org/source/$TARBALL.asc
-	fi
-	# verify the signature
-	gpg --verify $TARBALL.sig $TARBALL
-	if [ ! $? -eq 0 ]
-	then
-		echo "invalid signature for openssl-$1"
-	fi
-popd > /dev/null
+if [ ! -e "$TARBALL" ]
+then
+    pushd tarballs > /dev/null
+	wget http://www.openssl.org/source/$TARBALL
+    popd > /dev/null
+fi
 
 mkdir -p releases/$VERSION
 pushd src > /dev/null
