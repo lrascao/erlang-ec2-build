@@ -3,22 +3,27 @@ VERSION=$1
 TARBALL=gcc-$VERSION.tar.gz
 BASE_DIR=`pwd`
 
+# ensure gcc and g++
+if [ "$(which gcc 2>/dev/null)" = "" ]
+then
+    echo "no valid gcc found. use update-alternatives to configure one"
+    exit 1
+fi
+if [ "$(which g++ 2>/dev/null)" = "" ]
+then
+    echo "no valid g++ found. use update-alternatives to configure one"
+    exit 1
+fi
+
 # ensure dirs
 mkdir -p src tarballs releases
 
-pushd tarballs > /dev/null
-    if [ ! -e "$TARBALL" ]
-    then
-        wget ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$VERSION/$TARBALL
-        wget ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$VERSION/$TARBALL.sig
-    fi
-    # verify the signature
-    gpg --verify $TARBALL.sig $TARBALL
-    if [ ! $? -eq 0 ]
-    then
-        echo "invalid signatures for gcc $VERSION"
-    fi
-popd
+if [ ! -e "$TARBALL" ]
+then
+    pushd tarballs > /dev/null
+    wget ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$VERSION/$TARBALL
+    popd > /dev/null
+fi
 
 pushd src > /dev/null
 	cp ../tarballs/$TARBALL .
@@ -30,13 +35,13 @@ pushd src > /dev/null
 
 		make
 		make install
-	popd
-popd
+	popd > /dev/null
+popd > /dev/null
 
-pushd releases
+pushd releases > /dev/null
 	rm -f latest
 	ln -s $VERSION latest
-popd
+popd > /dev/null
 
 # update alternative gcc
 # update alternative gcc
