@@ -21,7 +21,7 @@ mkdir -p src tarballs releases
 if [ ! -e "$TARBALL" ]
 then
     pushd tarballs > /dev/null
-    wget ftp://ftp.gnu.org/pub/gnu/gcc/gcc-$VERSION/$TARBALL
+    wget https://ftp.gnu.org/pub/gnu/gcc/gcc-$VERSION/$TARBALL
     popd > /dev/null
 fi
 
