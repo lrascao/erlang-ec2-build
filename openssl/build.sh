@@ -8,7 +8,7 @@ mkdir -p releases src tarballs
 if [ ! -e "$TARBALL" ]
 then
     pushd tarballs > /dev/null
-	wget http://www.openssl.org/source/$TARBALL
+	wget https://www.openssl.org/source/$TARBALL
     popd > /dev/null
 fi
 
